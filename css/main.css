@@ -1,0 +1,32 @@
+.card {
+    margin: 100px 0;
+}
+
+.card .card-header {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.card label {
+    font-weight: bold;
+}
+
+body .card:first-of-type .card-header {
+    background-color: #FEE140;
+    background-image: linear-gradient(90deg, #FEE140 0%, #FA709A 100%);
+}
+
+body .card:nth-of-type(2) .card-header {
+    background-color: #4158D0;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+}
+
+body .card:nth-of-type(3) .card-header {
+    background-color: #FBAB7E;
+    background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+}
+
+body .card:nth-of-type(4) .card-header {
+    background-color: #0093E9;
+    background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+}
