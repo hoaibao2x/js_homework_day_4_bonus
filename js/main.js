@@ -21,41 +21,138 @@ function doanThoiGian() {
     var nhanNamNhap = Number(document.getElementById('inputYear').value);
 
     // Process
-    var hienNgayMai = tangGiaTri(nhanNgayNhap, nhanThangNhap, nhanNamNhap);
-    var hienHomQua = giamGiaTri(nhanNgayNhap, nhanThangNhap, nhanNamNhap);
-
-    // Output
-    // document.getElementById('inNgayMai').innerHTML = 'Mai là ' + hienNgayMai + " chứ gì (●'◡'●)";
-    // document.getElementById('inHomQua').innerHTML = 'Còn hôm qua là ' + hienHomQua + ", không trật đi đâu được (￣y▽￣)╭ Ohohoho.....";
+    // var ktTrong = checkTrong(nhanNgayNhap, nhanThangNhap, nhanNamNhap);
+    var congThoiGian = fncCong(nhanNgayNhap, nhanThangNhap, nhanNamNhap);
+    var checkNam = dauHoacCuoiNam(nhanNgayNhap, nhanThangNhap, nhanNamNhap);
+    var truThoiGian = fncTru(nhanNgayNhap, nhanThangNhap, nhanNamNhap);
 
 
+    if (nhanNgayNhap == 1 && nhanThangNhap == 1) {
+        document.querySelector('#inHomQua').innerHTML = 'Ngày hôm qua là ' + checkNam;
+        document.querySelector('#inNgayMai').innerHTML = 'Ngày mai là ' + congThoiGian;
+    } else if (nhanNgayNhap == 31 & nhanThangNhap == 12) {
+        document.querySelector('#inHomQua').innerHTML = 'Ngày hôm qua là ' + truThoiGian;
+        document.querySelector('#inNgayMai').innerHTML = 'Ngày mai là ' + checkNam;
+    } else {
+        document.querySelector('#inHomQua').innerHTML = 'Ngày hôm qua là ' + truThoiGian;
+        document.querySelector('#inNgayMai').innerHTML = 'Ngày mai là ' + congThoiGian;
+    }
 
 }
 
-// Kiểm tra đầu/ cuối tháng
-// function checkStatusMonth(nhapNgay, nhapThang) {
-//     if (nhapNgay == 1 && nhapThang == 1) {
-//        nhapThang = 12;
-//     } else if (nhapNgay == 30 || )
-// }
-
-// Increase function
-function tangGiaTri(nhapNgay, nhapThang, nhapNam) {
-    var hienThiTang = '';
-    nhapNgay++;
-
-    hienThiTang = 'ngày ' + nhapNgay + ' ' + 'tháng ' + nhapThang + ' ' + 'năm ' + nhapNam;
-    return hienThiTang;
+// Function kiểm tra input trống
+function checkTrong(nhapNgay, nhapThang, nhapNam) {
+    if (nhapNgay == '' || nhapThang == '' || nhapNam == '') {
+        alert('Nhập thiếu dữ liệu kia người anh em, nhập lại cho đầy đủ đê -_- !');
+        document.querySelector('#inHomQua').innerHTML = '';
+        document.querySelector('#inNgayMai').innerHTML = '';
+    } 
+    return true;
 }
 
-// Reduce function
-function giamGiaTri(nhapNgay, nhapThang, nhapNam) {
-    var hienThiTang = '';
-    nhapNgay--;
-
-    hienThiTang = 'ngày ' + nhapNgay + ' ' + 'tháng ' + nhapThang + ' ' + 'năm ' + nhapNam;
-    return hienThiTang;
+// Function kiểm tra đầu/ cuối năm
+function dauHoacCuoiNam(nhapNgay, nhapThang, nhapNam) {
+    var ketQua = '';
+    if (nhapNgay == 1 & nhapThang == 1) {
+        nhapNgay = 31;
+        nhapThang = 12;
+        nhapNam--;
+    } else if (nhapNgay == 31 && nhapThang == 12) {
+        nhapNgay = 1;
+        nhapThang = 1;
+        nhapNam++;
+    }
+    ketQua = nhapNgay + '/' + nhapThang + '/' + nhapNam;
+    return ketQua;
 }
+
+// Function cộng thời gian
+function fncCong(nhapNgay, nhapThang, nhapNam) {
+    var ketQua = '';
+    switch (nhapThang) {
+        case 2:
+            if (nhapNgay == 28) {
+                nhapNgay = 1;
+                nhapThang++;
+            } else {
+                nhapNgay++;
+            }
+            break;
+
+        case 4:
+        case 6:
+        case 9:
+        case 11:
+            if (nhapNgay == 30) {
+                nhapNgay = 1;
+                nhapThang += 1;
+            } else {
+                nhapNgay += 1;
+            }
+            break;
+
+        default:
+            if (nhapNgay == 31) {
+                nhapNgay = 1;
+                nhapThang++;
+            } else {
+                nhapNgay++;
+            }
+            break;
+    }
+    ketQua = nhapNgay + '/' + nhapThang + '/' + nhapNam;
+    return ketQua;
+}
+
+// Function trừ thời gian
+function fncTru(nhapNgay, nhapThang, nhapNam) {
+
+    var ketQua = '';
+    switch (nhapThang) {
+        case 1:
+            if (nhapNgay > 31 && nhapNgay <= 0) {
+                alert('Error !');
+            } else {
+                nhapNgay--;
+            }
+            break;
+
+        case 3:
+            if (nhapNgay == 1) {
+                nhapNgay = 28;
+                nhapThang--;
+            } else {
+                nhapNgay--;
+            }
+            break;
+
+        case 2:
+        case 4:
+        case 6:
+        case 9:
+        case 11:
+            if (nhapNgay == 1) {
+                nhapNgay = 31;
+                nhapThang--;
+            } else {
+                nhapNgay--;
+            }
+            break;
+
+        default:
+            if (nhapNgay == 1) {
+                nhapNgay = 30;
+                nhapThang--;
+            } else {
+                nhapNgay--;
+            }
+            break;
+    }
+    ketQua = nhapNgay + '/' + nhapThang + '/' + nhapNam;
+    return ketQua;
+
+}
+
 
 
 
@@ -164,7 +261,10 @@ function namKoNhuan(nhapThang) {
             inKetQua += 'Tháng này có 27 hoặc 28 ngày';
             break;
 
-        case 4, 6, 9, 11:
+        case 4: 
+        case 6: 
+        case 9: 
+        case 11:
             inKetQua += 'Tháng này có 30 ngày';
             break;
 
@@ -376,7 +476,7 @@ function xuLyThongTin() {
     var checkThongBao4 = checkEmpty(xTruongX, yTruongX);
 
     // Gọi hàm tính quãng đường
-    var tinhDuongSV1 = tinhQuangDuong(xSinhVien1,ySinhVien1,xTruongX,yTruongX);
+    var tinhDuongSV1 = tinhQuangDuong(xSinhVien1, ySinhVien1, xTruongX, yTruongX);
     var tinhDuongSV2 = tinhQuangDuong(xSinhVien2, ySinhVien2, xTruongX, yTruongX);
     var tinhDuongSV3 = tinhQuangDuong(xSinhVien3, ySinhVien3, xTruongX, yTruongX);
 
@@ -386,7 +486,7 @@ function xuLyThongTin() {
     } else {
         if (tinhDuongSV1 > tinhDuongSV2) {
             if (tinhDuongSV2 > tinhDuongSV3) {
-                inKetQua.innerHTML = 'Sinh viên xa trường nhất là ' + tenSV1; 
+                inKetQua.innerHTML = 'Sinh viên xa trường nhất là ' + tenSV1;
             } else {
                 if (tinhDuongSV1 > tinhDuongSV3) {
                     inKetQua.innerHTML = 'Sinh viên xa trường nhất là ' + tenSV1;
@@ -398,7 +498,7 @@ function xuLyThongTin() {
             if (tinhDuongSV1 >= tinhDuongSV3 || tinhDuongSV1 <= tinhDuongSV3) {
                 inKetQua.innerHTML = 'Sinh viên xa trường nhất là ' + tenSV2;
             }
-        } 
+        }
     }
 }
 
@@ -411,7 +511,7 @@ function checkEmpty(nhanTenSV, nhanInputX, nhanInputY) {
 
 // Function tính quãng đường
 function tinhQuangDuong(xDiemDau, yDiemDau, xDiemCuoi, yDiemCuoi) {
-    var tinhDauCuoi =Math.sqrt((Math.pow((xDiemCuoi - xDiemDau), 2)) + (Math.pow((yDiemCuoi - yDiemDau), 2)));
+    var tinhDauCuoi = Math.sqrt((Math.pow((xDiemCuoi - xDiemDau), 2)) + (Math.pow((yDiemCuoi - yDiemDau), 2)));
 
     return tinhDauCuoi;
 }

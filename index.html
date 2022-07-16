@@ -26,24 +26,24 @@
         <div class="card-body">
             <div class="form-group">
                 <label for="inputDate">Nhập ngày đi:</label>
-                <input id="inputDate" type="text" class="form-control">
+                <input id="inputDate" type="number" class="form-control">
             </div>
             <div class="form-group">
                 <label for="inputMonth">Nhập tháng nữa:</label>
-                <input id="inputMonth" type="text" class="form-control">
+                <input id="inputMonth" type="number" class="form-control">
             </div>
             <div class="form-group">
                 <label for="inputYear">Nhớ nhập năm:</label>
-                <input id="inputYear" type="text" class="form-control">
+                <input id="inputYear" type="number" class="form-control">
             </div>
             <div class="form-group">
-                <button id="btnDuDoan" class="btn btn-success" onclick="doanThoiGian()">Úm ba la xì bùa !</button>
+                <button id="btnDuDoan" class="btn btn-success" onclick="doanThoiGian()">Úm ba la xì bùa</button>
             </div>
-            <div class="alert alert-info">
-                <span id="inNgayMai"></span>
-            </div>
-            <div class="alert alert-dark">
+            <div class="alert alert-secondary">
                 <span id="inHomQua"></span>
+            </div>
+            <div class="alert alert-primary">
+                <span id="inNgayMai"></span>
             </div>
         </div>
     </div>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="form-group">
                     <label for="inputYear_2">Nhớ nhập năm:</label>
-                    <input id="inputYear_2" type="text" class="form-control">
+                    <input id="inputYear_2" type="number" class="form-control">
                 </div>
                 <div class="form-group">
                     <button id="btnDuDoan" class="btn btn-success" onclick="demSoNgay()" type="button">Tui đếm à nha
