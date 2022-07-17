@@ -40,22 +40,6 @@ function checkTrong(nhapNgay, nhapThang, nhapNam) {
     return true;
 }
 
-// Function kiểm tra đầu/ cuối năm
-function dauHoacCuoiNam(nhapNgay, nhapThang, nhapNam) {
-    var ketQua = '';
-    if (nhapNgay == 1 & nhapThang == 1) {
-        nhapNgay = 31;
-        nhapThang = 12;
-        nhapNam--;
-    } else if (nhapNgay == 31 && nhapThang == 12) {
-        nhapNgay = 1;
-        nhapThang = 1;
-        nhapNam++;
-    }
-    ketQua = nhapNgay + '/' + nhapThang + '/' + nhapNam;
-    return ketQua;
-}
-
 // Function cộng thời gian
 function fncCong(nhapNgay, nhapThang, nhapNam) {
     var ketQua = '';
