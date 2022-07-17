@@ -23,20 +23,10 @@ function doanThoiGian() {
     // Process
     // var ktTrong = checkTrong(nhanNgayNhap, nhanThangNhap, nhanNamNhap);
     var congThoiGian = fncCong(nhanNgayNhap, nhanThangNhap, nhanNamNhap);
-    var checkNam = dauHoacCuoiNam(nhanNgayNhap, nhanThangNhap, nhanNamNhap);
     var truThoiGian = fncTru(nhanNgayNhap, nhanThangNhap, nhanNamNhap);
 
-
-    if (nhanNgayNhap == 1 && nhanThangNhap == 1) {
-        document.querySelector('#inHomQua').innerHTML = 'Ngày hôm qua là ' + checkNam;
-        document.querySelector('#inNgayMai').innerHTML = 'Ngày mai là ' + congThoiGian;
-    } else if (nhanNgayNhap == 31 & nhanThangNhap == 12) {
-        document.querySelector('#inHomQua').innerHTML = 'Ngày hôm qua là ' + truThoiGian;
-        document.querySelector('#inNgayMai').innerHTML = 'Ngày mai là ' + checkNam;
-    } else {
-        document.querySelector('#inHomQua').innerHTML = 'Ngày hôm qua là ' + truThoiGian;
-        document.querySelector('#inNgayMai').innerHTML = 'Ngày mai là ' + congThoiGian;
-    }
+    document.querySelector('#inHomQua').innerHTML = 'Ngày hôm qua là ' + truThoiGian;
+    document.querySelector('#inNgayMai').innerHTML = 'Ngày mai là ' + congThoiGian;
 
 }
 
@@ -46,7 +36,7 @@ function checkTrong(nhapNgay, nhapThang, nhapNam) {
         alert('Nhập thiếu dữ liệu kia người anh em, nhập lại cho đầy đủ đê -_- !');
         document.querySelector('#inHomQua').innerHTML = '';
         document.querySelector('#inNgayMai').innerHTML = '';
-    } 
+    }
     return true;
 }
 
@@ -92,7 +82,11 @@ function fncCong(nhapNgay, nhapThang, nhapNam) {
             break;
 
         default:
-            if (nhapNgay == 31) {
+            if (nhapNgay == 31 && nhapThang == 12) {
+                nhapNgay = 1;
+                nhapThang = 1;
+                nhapNam++;
+            } else if (nhapNgay == 31) {
                 nhapNgay = 1;
                 nhapThang++;
             } else {
@@ -109,14 +103,6 @@ function fncTru(nhapNgay, nhapThang, nhapNam) {
 
     var ketQua = '';
     switch (nhapThang) {
-        case 1:
-            if (nhapNgay > 31 && nhapNgay <= 0) {
-                alert('Error !');
-            } else {
-                nhapNgay--;
-            }
-            break;
-
         case 3:
             if (nhapNgay == 1) {
                 nhapNgay = 28;
@@ -140,7 +126,11 @@ function fncTru(nhapNgay, nhapThang, nhapNam) {
             break;
 
         default:
-            if (nhapNgay == 1) {
+            if (nhapNgay == 1 && nhapThang == 1) {
+                nhapNgay = 31;
+                nhapThang = 12;
+                nhapNam--;
+            } else if (nhapNgay == 1) {
                 nhapNgay = 30;
                 nhapThang--;
             } else {
@@ -261,9 +251,9 @@ function namKoNhuan(nhapThang) {
             inKetQua += 'Tháng này có 27 hoặc 28 ngày';
             break;
 
-        case 4: 
-        case 6: 
-        case 9: 
+        case 4:
+        case 6:
+        case 9:
         case 11:
             inKetQua += 'Tháng này có 30 ngày';
             break;
